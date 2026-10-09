@@ -41,7 +41,9 @@ public class AuthServiceImplementation implements AuthService {
         user.setEmail(regRequest.getEmail());
         user.setPassword(passwordEncoder.encode(regRequest.getPassword()));
 
-        if (regRequest.getRole().equals(Role.ADMIN)) {
+        if (regRequest.getRole() == null) {
+            user.setRole(Role.USER);
+        } else if (regRequest.getRole().equals(Role.ADMIN)) {
             user.setRole(Role.ADMIN);
         } else {
             user.setRole(Role.USER);
